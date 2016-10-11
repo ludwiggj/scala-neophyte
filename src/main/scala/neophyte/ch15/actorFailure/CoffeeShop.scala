@@ -28,5 +28,7 @@ object CoffeeShop extends App {
 
   barista ! ClosingTime
 
+  Thread.sleep(1500);
+
   system.shutdown()
 }
