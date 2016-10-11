@@ -14,7 +14,7 @@ object Register {
 
 }
 
-class Register extends Actor {
+class Register extends Actor with ActorLogging {
 
   import Register._
   import Barista._
@@ -27,7 +27,18 @@ class Register extends Actor {
       val price = prices(item)
       sender ! createReceipt(price)
       revenue += price
+      log.info(s"Revenue incremented to $revenue cents")
   }
 
-  def createReceipt(price: Int): Receipt = Receipt(price)
+  def createReceipt(price: Int): Receipt = {
+    import util.Random
+    if (Random.nextBoolean())
+      throw new PaperJamException("OMG, not again!")
+    Receipt(price)
+  }
+
+  override def postRestart(reason: Throwable) {
+    super.postRestart(reason)
+    log.info(s"Restarted: revenue is $revenue cents. Cause: ${reason.getMessage}")
+  }
 }

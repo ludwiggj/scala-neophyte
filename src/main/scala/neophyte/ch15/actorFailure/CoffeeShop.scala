@@ -9,12 +9,24 @@ object CoffeeShop extends App {
 
   val barista: ActorRef = system.actorOf(Props[Barista], "Barista")
   val customerJohnny: ActorRef = system.actorOf(Props(classOf[Customer], barista), "Johnny")
+  val customerBert: ActorRef = system.actorOf(Props(classOf[Customer], barista), "Bert")
+  val customerErnie: ActorRef = system.actorOf(Props(classOf[Customer], barista), "Ernie")
+  val customerMel: ActorRef = system.actorOf(Props(classOf[Customer], barista), "Mel")
+  val customerSue: ActorRef = system.actorOf(Props(classOf[Customer], barista), "Sue")
   val customerAlicia: ActorRef = system.actorOf(Props(classOf[Customer], barista), "Alicia")
 
   println("Let's serve coffee!")
 
   customerJohnny ! CaffeineWithdrawalWarning
+  customerMel ! CaffeineWithdrawalWarning
   customerAlicia ! CaffeineWithdrawalWarning
+  customerSue ! CaffeineWithdrawalWarning
+  customerBert ! CaffeineWithdrawalWarning
+  customerErnie ! CaffeineWithdrawalWarning
+
+  Thread.sleep(3000);
 
   barista ! ClosingTime
+
+  system.shutdown()
 }
