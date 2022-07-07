@@ -1,10 +1,11 @@
 package neophyte.promises
 
+import neophyte.ch09.promises.WaitOnMultipleFuturesInParallel._
 import org.scalatest.{FunSuite, Matchers}
+
 import scala.concurrent.Future
 import scala.concurrent.duration._
 import concurrent.ExecutionContext.Implicits.global
-import WaitOnMultipleFuturesInParallel._
 
 import scala.language.postfixOps
 

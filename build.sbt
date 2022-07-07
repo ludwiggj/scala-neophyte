@@ -1,4 +1,4 @@
-name := "scalaNeophyte"
+name := "scala-neophyte"
 
 version := "1.0"
 
